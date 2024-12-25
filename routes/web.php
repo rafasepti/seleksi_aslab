@@ -12,9 +12,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth', 'checkRole:admin')->group(function () {
-    Route::get('/dashboard/admin', function () {
+    Route::get('/admin/dashboard', function () {
         return view('admin.index');
     })->name('index.admin');
+
+    
 });
 
 Route::middleware('auth')->group(function () {
