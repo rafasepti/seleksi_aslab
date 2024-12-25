@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $hak_akses = Auth::user()->hak_akses;
+        if ($hak_akses === 'admin') {
+            return redirect()->intended(route('index.admin', absolute: false));
+            
+        } else {
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
     }
 
     /**

@@ -11,6 +11,12 @@ Route::get('/dashboard', function () {
     return view('mahasiswa.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth', 'checkRole:admin')->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.index');
+    })->name('index.admin');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
