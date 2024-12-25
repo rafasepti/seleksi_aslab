@@ -2,7 +2,7 @@
 @section('header')
     <div class="col-md-8">
         <div class="page-header-title">
-            <h5 class="m-b-10">Halo Mahasiswa</h5>
+            <h5 class="m-b-10">Halo Admin</h5>
             <p class="m-b-0">Lorem Ipsum is simply dummy text of the printing</p>
         </div>
     </div>
