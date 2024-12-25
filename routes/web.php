@@ -17,6 +17,7 @@ Route::middleware('auth', 'checkRole:admin')->group(function () {
         return view('admin.index');
     })->name('index.admin');
 
+    Route::get('/prodi/datatable', [ProdiController::class, 'dataTable'])->name('admin.prodi.datatable');
     Route::resource('prodi', ProdiController::class);
 });
 

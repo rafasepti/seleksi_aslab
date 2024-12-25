@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('seleksi_saw', function (Blueprint $table) {
             $table->id();
-            $table->enum('kriteria', []);
-            $table->enum('bobot_kriteria', []);
+            $table->string('kriteria');
+            $table->string('bobot_kriteria');
             $table->decimal('hasil_akhir',10,2);
             $table->timestamps();
         });

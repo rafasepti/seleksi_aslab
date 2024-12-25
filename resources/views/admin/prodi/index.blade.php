@@ -17,8 +17,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h5>Hello card</h5>
-                <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                <h5>Tabel Data Prodi</h5>
                 <div class="card-header-right">
                     <ul class="list-unstyled card-option">
                         <li><i class="fa fa-chevron-left"></i></li>
@@ -30,11 +29,55 @@
                 </div>
             </div>
             <div class="card-block">
-                <p>
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                </p>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0 yajra-datatable">
+                        <thead>
+                            <tr>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    No.
+                                </th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Prodi
+                                </th>
+                                <th class="text-secondary opacity-7">
+                                    <a href="{{ route('prodi.create') }}"></a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(function() {
+
+            var table = $('.yajra-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('prodi/datatable') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'nama_prodi',
+                        name: 'nama_prodi'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true,
+                        className: 'align-middle text-center'
+                    },
+                ]
+            });
+
+        });
+    </script>
 @endsection
