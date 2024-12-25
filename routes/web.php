@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ Route::middleware('auth', 'checkRole:admin')->group(function () {
         return view('admin.index');
     })->name('index.admin');
 
-    
+    Route::resource('prodi', ProdiController::class);
 });
 
 Route::middleware('auth')->group(function () {
