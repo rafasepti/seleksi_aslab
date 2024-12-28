@@ -39,7 +39,9 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Prodi
                                 </th>
                                 <th class="text-secondary opacity-7">
-                                    <a href="{{ route('prodi.create') }}"></a>
+                                    {{-- <a href="{{ route('prodi.create') }}" class="btn btn-primary btn-sm btn-md">Tambah</a> --}}
+                                    <button class="btn btn-primary btn-sm btn-md" data-bs-toggle="modal"
+                                        data-bs-target="#prodiModal">Tambah</button>
                                 </th>
                             </tr>
                         </thead>
@@ -51,6 +53,15 @@
             </div>
         </div>
     </div>
+
+    @include('admin.prodi.create')
+    @include('admin.prodi.update')
+
+    @if (session('success'))
+        <div class="alert alert-success mt-3">
+            {{ session('success') }}
+        </div>
+    @endif
 @endsection
 @section('script')
     <script type="text/javascript">
@@ -78,6 +89,23 @@
                 ]
             });
 
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateModal = document.getElementById('updateModal');
+            updateModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget; // Tombol yang diklik untuk membuka modal
+                const namaProdi = button.getAttribute('data-nama_prodi'); // Ambil data-nama_prodi
+                const formAction = button.getAttribute('data-url'); // Ambil data-url
+
+                // Masukkan nilai ke dalam input dan form action
+                const inputNamaProdi = updateModal.querySelector('#namaProdi');
+                inputNamaProdi.value = namaProdi;
+
+                const form = updateModal.querySelector('form');
+                form.action = formAction;
+            });
         });
     </script>
 @endsection

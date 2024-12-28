@@ -26,10 +26,17 @@ class ProdiController extends Controller
             return DataTables::of($prodi)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $editUrl = route('prodi.edit', $data->id);
+                    $editUrl = route('prodi.update', $data->id);
                     $deleteUrl = route('prodi.destroy', $data->id);
                     return '
-                    <a href="' . $editUrl . '" class="btn btn-info btn-sm">Edit</a>
+                      <button 
+                        class="btn btn-info btn-sm" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#updateModal" 
+                        data-url="' . $editUrl . '" 
+                        data-nama_prodi="' . htmlspecialchars($data->nama_prodi, ENT_QUOTES, 'UTF-8') . '">
+                        Edit
+                    </button>
                     <form action="' . $deleteUrl . '" method="POST" style="display: inline;">
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
@@ -46,7 +53,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prodi.create');
     }
 
     /**
@@ -54,7 +61,14 @@ class ProdiController extends Controller
      */
     public function store(StoreProdiRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'nama_prodi' => 'required|string|max:255',
+        ]);
+
+        Prodi::create(['nama_prodi' => $validated['nama_prodi']]);
+
+        // Simpan data atau lakukan sesuatu dengan $validated['nama_prodi']
+        return redirect()->route('prodi.index')->with('success', 'Prodi berhasil ditambahkan!');
     }
 
     /**
@@ -78,7 +92,16 @@ class ProdiController extends Controller
      */
     public function update(UpdateProdiRequest $request, Prodi $prodi)
     {
-        //
+        $validated = $request->validate([
+            'nama_prodi' => 'required|string|max:255',
+        ]);
+
+        $prodi->update([
+            'nama_prodi' => $validated['nama_prodi'],
+        ]);
+
+        // Simpan data atau lakukan sesuatu dengan $validated['nama_prodi']
+        return redirect()->route('prodi.index')->with('success', 'Prodi berhasil diubah!');
     }
 
     /**
@@ -86,6 +109,8 @@ class ProdiController extends Controller
      */
     public function destroy(Prodi $prodi)
     {
-        //
+        $prodi->delete();
+
+        return redirect()->route('prodi.index')->with('success', 'Prodi Berhasil Dihapus!');
     }
 }
