@@ -15,6 +15,11 @@
 @endsection
 @section('content')
     <div class="col-sm-12">
+        @if (session('success'))
+            <div class="alert alert-success mt-3">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h5>Tabel Data Prodi</h5>
@@ -56,12 +61,6 @@
 
     @include('admin.prodi.create')
     @include('admin.prodi.update')
-
-    @if (session('success'))
-        <div class="alert alert-success mt-3">
-            {{ session('success') }}
-        </div>
-    @endif
 @endsection
 @section('script')
     <script type="text/javascript">
