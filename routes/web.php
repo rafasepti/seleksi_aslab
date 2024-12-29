@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ Route::middleware('auth', 'checkRole:admin')->group(function () {
 
     Route::get('/prodi/datatable', [ProdiController::class, 'dataTable'])->name('admin.prodi.datatable');
     Route::resource('prodi', ProdiController::class);
+
+    Route::get('/dosen/datatable', [DosenController::class, 'dataTable'])->name('admin.dosen.datatable');
+    Route::resource('dosen', DosenController::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -44,6 +44,13 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
+            <li class="{{ Route::currentRouteName() == 'dosen.index' ? 'active' : '' }}">
+                <a href="{{ route('dosen.index') }}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-user"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Dosen</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
         </ul>
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Forms &amp; Tables</div>
         <ul class="pcoded-item pcoded-left-item">
